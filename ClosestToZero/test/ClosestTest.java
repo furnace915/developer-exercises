@@ -38,6 +38,11 @@ public class ClosestTest {
 	}
 	
 	@Test
+	public void findClosestToZeroForPositiveAndNegativeNumbersWithTieReverseOrder() {
+		Assert.assertEquals(1, Closest.findClosetToZero(1,2,-1,4));
+	}
+	
+	@Test
 	public void findClosestToZeroForAllNegatives() {
 		Assert.assertEquals(-1, Closest.findClosetToZero(-2,-1,-3));
 	}
