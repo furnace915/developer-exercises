@@ -8,9 +8,9 @@ public class Closest {
 			if (Math.abs(iArr[i]) < Math.abs(closest)) {
 				closest = iArr[i];
 			}
-			if (Math.abs(iArr[i]) == Math.abs(closest)) {
-				closest = Math.max(iArr[i], closest);
-			}
+			else if (Math.abs(iArr[i]) == Math.abs(closest)){
+					closest = Math.max(iArr[i], closest);
+			}			
 		}
 		return closest;
 	}
