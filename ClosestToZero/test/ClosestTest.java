@@ -28,6 +28,11 @@ public class ClosestTest {
 	}
 	
 	@Test
+	public void findClosestToZeroForPositiveAndNegativeNumbersWithZero() {
+		Assert.assertEquals(0, Closest.findClosetToZero(-1,2,0,-3,4));
+	}
+	
+	@Test
 	public void findClosestToZeroForPositiveAndNegativeNumbersWithNegativeWinner() {
 		Assert.assertEquals(-1, Closest.findClosetToZero(-1,2,-3,4));
 	}
@@ -35,6 +40,11 @@ public class ClosestTest {
 	@Test
 	public void findClosestToZeroForPositiveAndNegativeNumbersWithTie() {
 		Assert.assertEquals(1, Closest.findClosetToZero(-1,2,1,4));
+	}
+	
+	@Test
+	public void findClosestToZeroForPositiveAndNegativeNumbersWithTieAndZero() {
+		Assert.assertEquals(0, Closest.findClosetToZero(-2,2,1,0,4));
 	}
 	
 	@Test
