@@ -10,34 +10,39 @@ public class FrameTest {
 	
 	@Before
 	public void setUp(){
-		frame = new Frame();
+
 	}
 	
 	@Test
 	public void computeFrameScoreWithoutMarks() {
-		assertEquals(9,frame.roll(4,5));
+		frame = new Frame(4,5);
+		assertEquals(9,frame.roll());
 	}
 	
 	@Test
 	public void computeFrameScoreWithSpare() {
-		assertEquals(10,frame.roll(4,6));
+		frame = new Frame(4,6);
+		assertEquals(10,frame.roll());
 	}
 	
 	@Test
 	public void frameNoStrike(){
-		frame.roll(1,8);
+		frame = new Frame(1,8);
+		frame.roll();
 		assertFalse(frame.hasStrike());
 	}
 	
 	@Test
 	public void frameHasStrike(){
-		frame.roll(10,0);
+		frame = new Frame(10,0);
+		frame.roll();
 		assertTrue(frame.hasStrike());
 	}
 	
 	@Test
 	public void frameHasSpare(){
-		frame.roll(1,9);
+		frame = new Frame(1,9);
+		frame.roll();
 		assertTrue(frame.hasSpare());
 	}
 
