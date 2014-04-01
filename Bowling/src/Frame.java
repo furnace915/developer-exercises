@@ -4,7 +4,6 @@ public class Frame {
 	public Frame(int roll1prop, int roll2prop) {
 		this.roll1 = roll1prop;
 		this.roll2 = roll2prop;
-		this.roll();
 	}
 
 	public int getRoll1() {

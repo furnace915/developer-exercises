@@ -3,36 +3,41 @@ import java.util.List;
 public class Game {
 
 	public int bowl(List<Frame> frames) {
+		
 		int total = 0;
-		boolean previousSpare = false;
-		boolean previousStrike = false;
+		preCalculateScoresForAllFrames(frames);
 
-		for (Frame frame : frames) {
-			if (!frameHasMark(frame)
-					&& !previousFrameHasMark(previousStrike, previousSpare)) {
-				total += frame.roll();
-			} else if (frameHasMark(frame)) {
-				total += 10;
-			} else if (!frameHasMark(frame) && previousSpare == true) {
-				total += frame.getRoll1();
-				total += frame.roll();
-			} else if (!frameHasMark(frame) && previousStrike == true) {
-				total += frame.roll();
-				total += frame.roll();
-			}
-			previousSpare = frame.hasSpare();
-			previousStrike = frame.hasStrike();
-		}
+		for (int i = 0; i < frames.size(); i++) {
+			if (i < 10) {
+				if (frames.get(i).hasSpare()) {
+					total += 10;
+					total += frames.get(i + 1).getRoll1();
+				} else if (!frames.get(i).hasSpare() && !frames.get(i).hasStrike()) {
+					total += frames.get(i).roll();
+				}
+				
+				if (frames.get(i).hasStrike()) {
+					total += 10;
+					if (!frames.get(i + 1).hasSpare() && !frames.get(i + 1).hasStrike()){
+						total += frames.get(i+1).roll();
+					}
+					else if (!frames.get(i + 1).hasSpare() && frames.get(i + 1).hasStrike()){
+						total += 10;
+						total += frames.get(i + 2).getRoll1();
+					}
+					else if (frames.get(i + 1).hasSpare() && !frames.get(i + 1).hasStrike()){
+						total += 10;
+					}
+				}
+			}			
+		}		
 		return total;
 	}
 
-	private boolean frameHasMark(Frame frame) {
-		return frame.hasSpare() || frame.hasStrike();
-	}
-
-	private boolean previousFrameHasMark(boolean previousSpare,
-			boolean previousStrike) {
-		return previousSpare || previousStrike;
+	private void preCalculateScoresForAllFrames(List<Frame> frames) {
+		for (Frame frame : frames) {
+			frame.roll();
+		}
 	}
 
 }
