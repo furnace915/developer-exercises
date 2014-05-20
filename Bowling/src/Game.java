@@ -7,9 +7,15 @@ public class Game {
 		int total = 0;
 		
 		preCalculateScoresForAllFrames(frames);
+		
+//		int frameNumber = 0;
+//		for (Frame frame : frames){
+//			total = score.scoreCurrentFrame(frames, frameNumber);
+//			frameNumber++;
+//		}
 
-		for (int i = 0; i < frames.size(); i++) {
-			total = score.handleScoring(frames, i);			
+		for (int currentFrame = 0; currentFrame < 10; currentFrame++) {
+			total = score.scoreCurrentFrame(frames, currentFrame);			
 		}		
 		return total;
 	}

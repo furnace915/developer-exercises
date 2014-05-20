@@ -5,8 +5,8 @@ public class ScoreHandler {
 
 	int total;
 	
-	public int handleScoring(List<Frame> frames, int frame) {
-		if (frame < 10) {
+	public int scoreCurrentFrame(List<Frame> frames, int frame) {
+		if (frame < frames.size()) {
 			if (frames.get(frame).hasStrike()) {
 				handleStrike(frames, frame);
 			}
