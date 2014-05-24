@@ -3,6 +3,7 @@ import java.util.List;
 
 public class ScoreHandler {
 
+	private static final int TENTH_FRAME = 10;
 	int frameScore;
 	List<Frame> frames = new ArrayList<Frame>();
 
@@ -11,13 +12,14 @@ public class ScoreHandler {
 	}
 
 	public int scoreCurrentFrame(int position) {
-		if (frames.get(position).hasStrike()) {
+		Frame frame = frames.get(position);
+		if (frame.isStrike()) {
 			handleStrike(position);
-		} else if (frames.get(position).hasSpare()) {
+		} else if (frame.isSpare()) {
 			handleSpare(position);
 
 		} else {
-			frameScore += frames.get(position).roll();
+			frameScore += frame.roll();
 		}
 
 		return frameScore;
@@ -25,7 +27,8 @@ public class ScoreHandler {
 
 	private void handleSpare(int position) {
 		addTenToFrameScore();
-		if (frames.get(position).getFrameNumber() < 11) {
+		Frame frame = frames.get(position);
+		if (frame.getFrameNumber() <= TENTH_FRAME) {
 			frameScore += getScoreForRoll1NextFrame(position);
 		}
 	}
@@ -36,7 +39,7 @@ public class ScoreHandler {
 
 	private void handleStrike(int frame) {
 		addTenToFrameScore();
-		if (frames.get(frame).getFrameNumber() < 10) {
+		if (frames.get(frame).getFrameNumber() < TENTH_FRAME) {
 			rollNextFrame(frame);
 			if (!nextFrameHasStrikeOrSpare(frame)) {
 				frameScore += getScoreForNextFrame(frame);
@@ -55,11 +58,11 @@ public class ScoreHandler {
 	}
 	
 	private boolean nextFrameHasSpare(int frame) {
-		return frames.get(frame + 1).hasSpare() && !frames.get(frame + 1).hasStrike();
+		return frames.get(frame + 1).isSpare() && !frames.get(frame + 1).isStrike();
 	}
 
 	private boolean nextFrameHasStrike(int frame) {
-		return !frames.get(frame + 1).hasSpare() && frames.get(frame + 1).hasStrike();
+		return !frames.get(frame + 1).isSpare() && frames.get(frame + 1).isStrike();
 	}
 
 	private int getScoreForNextFrame(int frame) {
@@ -67,7 +70,7 @@ public class ScoreHandler {
 	}
 
 	private boolean nextFrameHasStrikeOrSpare(int frame) {
-		return frames.get(frame + 1).hasSpare() || frames.get(frame + 1).hasStrike();
+		return frames.get(frame + 1).isSpare() || frames.get(frame + 1).isStrike();
 	}
 
 	private void rollNextFrame(int frame) {

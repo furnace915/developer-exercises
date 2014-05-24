@@ -22,21 +22,21 @@ public class FrameTest {
 	public void frameNoStrike() {
 		frame = new Frame(1, 8, 1);
 		frame.roll();
-		assertFalse(frame.hasStrike());
+		assertFalse(frame.isStrike());
 	}
 
 	@Test
 	public void frameHasStrike() {
 		frame = new Frame(10, 0, 1);
 		frame.roll();
-		assertTrue(frame.hasStrike());
+		assertTrue(frame.isStrike());
 	}
 
 	@Test
 	public void frameHasSpare() {
 		frame = new Frame(1, 9, 1);
 		frame.roll();
-		assertTrue(frame.hasSpare());
+		assertTrue(frame.isSpare());
 	}
 
 	@Test
