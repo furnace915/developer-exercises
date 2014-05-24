@@ -26,11 +26,11 @@ public class ScoreHandler {
 	private void handleSpare(int position) {
 		addTenToFrameScore();
 		if (frames.get(position).getFrameNumber() < 11) {
-			frameScore += getScoreForRoll1NextFrame(frames, position);
+			frameScore += getScoreForRoll1NextFrame(position);
 		}
 	}
 
-	private int getScoreForRoll1NextFrame(List<Frame> frames, int position) {
+	private int getScoreForRoll1NextFrame(int position) {
 		return frames.get(position + 1).getRoll1();
 	}
 
